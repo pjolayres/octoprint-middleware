@@ -11,7 +11,9 @@ import logger from '../shared/logger';
  */
 export default (app) => {
   app.post('/octoprint-webhook', async (req, res) => {
-    logger.info('/octoprint-webhook called %0.', req.body);
+    logger.info('/octoprint-webhook called');
+    logger.info(req.headers);
+    logger.info(req.body);
 
     const notifyMeAccessCode = process.env.NOTIFY_ME_ACCESS_CODE;
     const {
@@ -94,9 +96,14 @@ export default (app) => {
         }
       });
 
+      logger.info('Successfully sent notification');
+
       res.status(200);
     }
     catch (ex) {
+      logger.error('Failed to send notification.');
+      logger.error(ex);
+
       res.status(500);
     }
     finally {
