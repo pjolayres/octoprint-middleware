@@ -9,5 +9,5 @@
         "@babel/plugin-proposal-optional-chaining"
     ],
     "retainLines": true,
-    "sourceMaps": true
+    "sourceMaps": "inline"
 }

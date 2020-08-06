@@ -5,9 +5,7 @@ import fs from 'fs';
 const date = moment();
 const timestamp = date.format('YYYY-MM-DD_HH-mm-ss');
 const defaultConsoleLogLevel = 'debug';
-const defaultFileLogLevel = 'error';
-
-fs.mkdir('./logs', () => { /* no-op */ });
+const defaultFileLogLevel = 'info';
 
 const logger = winston.createLogger();
 
@@ -25,6 +23,8 @@ if (process.env.NODE_ENV === 'development') {
   logger.log('info', `Console logger initialized to "${process.env.LOG_LEVEL || `${defaultConsoleLogLevel} (default)`}"`);
 }
 else {
+  fs.mkdir('./logs', () => { /* no-op */ });
+
   logger.add(new winston.transports.File({
     format: winston.format.combine(
       winston.format.timestamp(),

@@ -1,3 +1,9 @@
-import logger from './shared/logger';
+import dotenv from 'dotenv';
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
 
-logger.info('Executed');
+import server from './server';
+
+dotenv.config();
+
+server();
